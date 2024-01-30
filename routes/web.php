@@ -1,6 +1,11 @@
 <?php
 
+use App\Http\Controllers\BooksController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ReservationsController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +21,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::resource('/home',HomeController::class)->names('home');
+Route::resource('/dashboard',UserController::class)->names('dashboard');
+Route::resource('/books',BooksController::class)->names('books');
+Route::resource('/reservations',ReservationsController::class)->names('reservations');
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
