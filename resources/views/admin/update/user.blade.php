@@ -9,7 +9,7 @@
         <div class="col-md-8">
             <div class="card bg-dark text-light" style="border: none">
                 <div class="card-body" >
-                    <form method="POST" action="{{ route('dashboard.update' , ['dashboard'=>$user->id]) }}"  enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('dashboard.update', ['dashboard' => $user->id]) }}"  enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="mb-3 cardimg">

@@ -13,6 +13,8 @@
 <style>
     .admin {
         display: flex;
+        justify-content: center;
+        align-items: center;
         gap: 1rem;
     }
 
@@ -88,15 +90,31 @@
                 </div>
 
                 <div class="admin">
-                    <div class="user">
-                        <img src="{{asset('images/me.jpg')}}" alt="">
-                    </div>
-                    <div class="name">
-                        <p>
-                            Nabil CHABAB
-                        </p>
-                        <p>Admin</p>
-                    </div>
+                    @guest
+                        @if (Route::has('login'))
+                            <a href="{{ route('login') }}">
+                                {{ __('Login') }}
+                            </a>
+                        @endif
+                    @else
+                        <div class="user">
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                          document.getElementById('logout-form').submit();"><img
+                                    src="{{ asset('storage/' . Auth::user()->profile) }}" alt=""></a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                        <div class="name">
+                            <p>
+                                {{ Auth::user()->name }}
+                            </p>
+
+                        </div>
+                    @endguest
+
+
                 </div>
             </div>
 
@@ -152,36 +170,55 @@
                 <div class="recentOrders">
                     <div class="cardHeader">
                         <h2>Recent Users</h2>
-                        <a href="add_students.php" class="btn">Create New</a>
+                        <a href="{{route('books.create')}}" class="btn">Create New</a>
                     </div>
 
                     <table id="userTable">
                         <thead>
+                            
                             <tr>
                                 <td>ID</td>
-                                <td>Profile</td>
-                                <td>FullName</td>
-                                <td>Email</td>
-                                <td>Phone</td>
-                                <td>Type</td>
+                                <td>Cover</td>
+                                <td>Title</td>
+                                <td>Author</td>
+                                <td>Category</td>
+                                <td>Description</td>
+                                <td>Publication_Year</td>
+                                <td>Available_Copies</td>
+                                <td>Total_Copies</td>
                                 <td>Actions</td>
 
                             </tr>
                         </thead>
 
                         <tbody id="userTableBody">
+                            @foreach ($books as $book)
+                                
                             <tr>
-                                <th>1</th>
-                                <td>zertyui</td>
-                                <td>zertyui</td>
-                                <td>zertyui</td>
-                                <td>zertyui</td>
-                                <td>zertyui</td>
-                                <td>
-                                    <a href="#" style="color:black;font-size:20px;margin-right:20px"><ion-icon name="pencil-outline"></ion-icon></a>
-                                    <a href="#" style="color:red;font-size:20px;"><ion-icon name="close-circle-outline"></ion-icon></a>
-                                    </td>
+                                <th> {{$book->id}} </th>
+                                <td> <img src="{{asset('storage/'.$book->cover)}}" alt="" srcset="" style="width: 60px;border-radius:10px"> </td>
+                                <td> {{$book->title}} </td>
+                                <td> {{$book->author}} </td>
+                                <td> {{$book->genre}} </td>
+                                <td> {{$book->description}} </td>
+                                <td> {{$book->publication_year}} </td>
+                                <td> {{$book->total_copies}} </td>
+                                <td> {{$book->available_copies}} </td>
+                                <td style="display: flex;align-items:center;justify-content:center">
+                                    <a href="{{ route('books.edit', ['book' => $book->id]) }}" style="color:black;font-size:20px;margin-right:20px">
+                                        <ion-icon name="pencil-outline"></ion-icon>
+                                    </a>
+                                    <form action="{{ route('books.destroy', ['book' => $book->id]) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" style="color:red;font-size:20px;background-color:transparent;border:none;cursor:pointer">
+                                            <ion-icon name="close-circle-outline"></ion-icon>
+                                        </button>
+                                    </form>
+                                            
+                                </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

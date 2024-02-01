@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reservations', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('books', function (Blueprint $table) {
+            $table->string('cover')->nullable()->after('title');
         });
     }
 
@@ -22,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('reservations');
+        Schema::table('books', function (Blueprint $table) {
+            //
+        });
     }
 };

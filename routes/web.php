@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BooksController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReservationsController;
@@ -18,14 +19,19 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/home', function () {
+//     return view('home');
+// });
 
 Auth::routes();
+Route::resource('home', HomeController::class);
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::resource('/dashboard', UserController::class)->names('dashboard');
+    Route::resource('/books', BooksController::class)->names('books');
+    Route::resource('/reservations', ReservationsController::class)->names('reservations');
+});
 
-Route::resource('/home',HomeController::class)->names('home');
-Route::resource('/dashboard',UserController::class)->names('dashboard');
-Route::resource('/books',BooksController::class)->names('books');
-Route::resource('/reservations',ReservationsController::class)->names('reservations');
-Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+Route::get('logout', [LoginController::class, 'logout']);
+
+

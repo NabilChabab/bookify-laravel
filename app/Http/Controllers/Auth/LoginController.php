@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class LoginController extends Controller
 {
@@ -41,10 +42,10 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         // Check the user's role and redirect accordingly
-        if ($user->role_id == 1) {
-            return redirect()->route('dashboard.index'); // Replace 'dashboard' with your actual route name
-        } elseif ($user->role_id == 2) {
-            return redirect()->route('home.index'); // Replace 'home' with your actual route name
+        if ($user->role->id == 1) {
+            return redirect()->route('dashboard.index'); 
+        } elseif ($user->role->id == 2) {
+            return redirect('home'); 
         }
 
         return redirect($this->redirectTo);

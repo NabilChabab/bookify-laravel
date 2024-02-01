@@ -198,14 +198,16 @@
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->phone }}</td>
                                     <td>
-                                        @if ($user->role_id == 1)
+                                        {{-- @if ($user->role_id == 1)
                                             Admin
                                         @else
                                             User
-                                        @endif
+                                        @endif --}}
+
+                                        {{$user->role->name}}
                                     </td>
                                     <td style="display: flex;align-items:center;justify-content:center">
-                                        <a href="{{ url('/dashboard/'.$user->id.'/edit') }}" style="color:black;font-size:20px;margin-right:20px"><ion-icon
+                                        <a href="{{ route('dashboard.edit', ['dashboard' => $user->id]) }}" style="color:black;font-size:20px;margin-right:20px"><ion-icon
                                                 name="pencil-outline"></ion-icon></a>
                                                 <form action="{{ route('dashboard.destroy', ['dashboard' => $user->id]) }}"
                                                     method="POST">
