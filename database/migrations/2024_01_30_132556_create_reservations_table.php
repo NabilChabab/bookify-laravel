@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->text('description');
-            $table->date('reservation_date');
             $table->date('return_date');
             $table->boolean('is_returned')->default(false);
             $table->foreignId('user_id')->constrained();

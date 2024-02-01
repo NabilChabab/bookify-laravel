@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BooksController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReservationsController;
 use App\Http\Controllers\UserController;
@@ -24,11 +25,11 @@ use Illuminate\Support\Facades\Auth;
 // });
 
 Auth::routes();
-Route::resource('home', HomeController::class);
+Route::resource('home', ReservationsController::class);
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('/dashboard', UserController::class)->names('dashboard');
     Route::resource('/books', BooksController::class)->names('books');
-    Route::resource('/reservations', ReservationsController::class)->names('reservations');
+    Route::resource('/reservations', DashboardController::class)->names('reservations');
 });
 
 

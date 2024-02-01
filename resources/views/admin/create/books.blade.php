@@ -4,11 +4,11 @@
 
 
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+<div class="container-fluid">
+    <div class="row justify-content-center bg-dark">
+        <div class="col-md-8 bg-dark">
             <div class="card bg-dark text-light" style="border: none">
-                <div class="card-body" >
+                <div class="card-body body" >
                     <form method="POST" action="{{ route('books.store') }}"  enctype="multipart/form-data">
                         @csrf
 

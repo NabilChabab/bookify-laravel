@@ -106,9 +106,9 @@ class UserController extends Controller
         return redirect('dashboard')->with('status', 'User Deleted Successfully!');
     }
 
-    public function assignRoleToUser(User $user, Role $role)
-{
-    $user->role()->associate($role);
-    $user->save();
-}
+//     public function assignRoleToUser(User $user, Role $role)
+// {
+//     $user->role()->associate($role);
+//     $user->save();
+// }
 }

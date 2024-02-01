@@ -4,12 +4,12 @@
 
 
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+<div class="container-fluid bg-dark">
+    <div class="row justify-content-center bg-dark">
+        <div class="col-md-8 bg-dark">
             <div class="card bg-dark text-light" style="border: none">
-                <div class="card-body" >
-                    <form method="POST" action="{{ route('dashboard.store') }}"  enctype="multipart/form-data">
+                <div class="card-body body" >
+                    <form method="POST" action="{{ route('dashboard.store') }}"  enctype="multipart/form-data" class="form">
                         @csrf
 
                         <div class="mb-3 cardimg">

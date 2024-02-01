@@ -27,3 +27,16 @@ margin-bottom: 20px;
 .cardimg input {
 display: none;
 }
+
+.body{
+    height: 100vh;
+}
+
+.form{
+    width: 600px;
+    left: 25%;
+    position: absolute;
+    
+}
+
+
