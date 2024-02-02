@@ -236,7 +236,24 @@
     <script src="{{asset('js/admin.js')}}"></script>
 
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
+
+    @if (session('status'))
+    <script>
+        setTimeout(function() {
+            Swal.fire({
+                title: 'Success',
+                text: '{{ session('status') }}',
+                icon: 'success',
+                confirmButtonClass: 'btn btn-success', // Custom class for the "OK" button
+                confirmButtonText: 'Cancel',
+                confirmButtonColor: 'rgb(102, 102, 245)',
+                 // Custom text for the "OK" button
+            });
+        }, {{ session('delay', 0) }});
+    </script>
+    @endif
 
 
 

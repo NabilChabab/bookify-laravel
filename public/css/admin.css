@@ -10,7 +10,7 @@
 }
 
 :root {
-  --blue: #00023A;
+  --blue: #f8780f;
   --white: #fff;
   --gray: #f5f5f5;
   --black1: #222;
@@ -317,7 +317,7 @@ body {
 }
 .details table thead td {
   font-weight: 600;
-  background-color: #00023A;
+  background-color: var(--blue);
   color: white;
   padding: 10px;
 }

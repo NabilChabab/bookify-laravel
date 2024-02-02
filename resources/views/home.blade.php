@@ -82,9 +82,9 @@
     <!-- Header-->
     <header class="masthead d-flex align-items-center">
         <div class="container px-4 px-lg-5 text-center">
-            <h1 class="mb-1">Welcome To Bookify</h1>
-            <h3 class="mb-5"><em>A Wonderfull Store to Book Any Book</em></h3>
-            <a class="btn btn-dark btn-xl" href="#about">Find Out More</a>
+            <h1 class="mb-1" style="font-weight: bold">Welcome To Bookify</h1>
+            <h3 class="mb-5" style="font-weight: bold"><em>A Wonderfull Store to Book Any Book</em></h3>
+            <a class="btn btn-warning btn-xl" href="#about" style="padding: 20px 30px;">Find Out More</a>
         </div>
     </header>
     <!-- About-->
@@ -189,10 +189,10 @@
 
             <div class="row col-12" style="gap:2rem;">
                 @foreach ($books as $book)
-                    <div class="card" style="width: 21.2rem;">
-                        <img class="card-img-top" src="{{ asset('storage/' . $book->cover) }}" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title text-black">
+                    <div class="card" style="width: 21.2rem;border-radius:20px;">
+                        <img class="card-img-top" src="{{ asset('storage/' . $book->cover) }}" alt="Card image cap" style="border-radius:20px;margin-top:10px">
+                        <div class="card-body ">
+                            <h5 class="card-title text-black" style="font-weight: bold">
                                 {{ $book->title }}
                             </h5>
                             <p class="card-text text-dark">
@@ -200,12 +200,12 @@
                             </p>
                             @guest
                                 @if (Route::has('login'))
-                                    <a href="{{ route('login') }}" class="btn btn-primary reserve-btn">
+                                    <a href="{{ route('login') }}" class="btn btn-dark reserve-btn">
                                         Book Now
                                     </a>
                                 @endif
                             @else
-                                <button type="button" class="btn btn-primary reserve-btn" data-bs-toggle="modal"
+                                <button type="button" class="btn btn-dark reserve-btn" data-bs-toggle="modal"
                                     data-bs-target="#reservationModal" data-book-id="{{ $book->id }}"
                                     data-book-cover="{{ asset('storage/' . $book->cover) }}">
                                     Book Now
@@ -295,7 +295,7 @@
         </div>
     </section>
     <!-- Call to Action-->
-    <section class="content-section bg-primary text-white">
+    <section class="content-section bg-dark text-white">
         <div class="container px-4 px-lg-5 text-center">
             <h2 class="mb-4">The buttons below are impossible to resist...</h2>
             <a class="btn btn-xl btn-light me-4" href="#!">Click Me!</a>
@@ -311,8 +311,8 @@
                 href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A"></a></small>
     </div>
     <!-- Footer-->
-    <footer class="footer text-center">
-        <div class="container px-4 px-lg-5">
+    <footer class="footer text-center text-white">
+        <div class="container px-4 px-lg-5 text-white">
             <ul class="list-inline mb-5">
                 <li class="list-inline-item">
                     <a class="social-link rounded-circle text-white mr-3" href="#!"><i
@@ -327,7 +327,7 @@
                             class="icon-social-github"></i></a>
                 </li>
             </ul>
-            <p class="text-muted small mb-0">Copyright &copy; Your Website 2023</p>
+            <p class="text-muted small mb-0 text-light">Copyright &copy; Your Website 2023</p>
         </div>
     </footer>
     <!-- Scroll to Top Button-->
@@ -338,44 +338,20 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     @if (session('success'))
-        <script>
-            setTimeout(function() {
-                Swal.fire('Success', '{{ session('success') }}', 'success');
-            }, {{ session('delay', 0) }});
-        </script>
+    <script>
+        setTimeout(function() {
+            Swal.fire({
+                title: 'Success',
+                text: '{{ session('success') }}',
+                icon: 'success',
+                confirmButtonClass: 'btn btn-success', // Custom class for the "OK" button
+                confirmButtonText: 'Cancel',
+                confirmButtonColor: 'rgb(102, 102, 245)',
+                 // Custom text for the "OK" button
+            });
+        }, {{ session('delay', 0) }});
+    </script>
     @endif
-
-    <script>
-        $(document).ready(function() {
-            // Attach click event handler to "Book Now" buttons
-            $('.reserve-btn').on('click', function() {
-                // Get book information from the clicked button
-                var bookId = $(this).data('book-id');
-                var bookTitle = $(this).closest('.card-body').find('.card-title').text();
-                var bookDescription = $(this).closest('.card-body').find('.card-text').text();
-                var bookCover = $(this).data('book-cover');
-
-                // Update modal content with book information
-                $('#bookId').val(bookId);
-                $('#bookTitle').text(bookTitle);
-                $('#bookDescription').text(bookDescription);
-                $('#bookCover').attr('src', bookCover); // Update image source
-
-                // Show the modal
-                $('#reservationModal').modal('show');
-            });
-        });
-    </script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var viewReservationsBtn = document.getElementById('viewReservationsBtn');
-            viewReservationsBtn.addEventListener('click', function() {
-                var reservationsModal = new bootstrap.Modal(document.getElementById('reservationsModal'));
-                reservationsModal.show();
-            });
-        });
-    </script>
 
 
 

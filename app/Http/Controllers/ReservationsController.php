@@ -16,7 +16,7 @@ class ReservationsController extends Controller
     public function index()
     {
         $books = Books::all();
-        $userReservations = Auth::user()->reservations;
+        $userReservations = Auth::user()->reservations ?? [];
     
         return view('home', compact('books', 'userReservations'));
     }

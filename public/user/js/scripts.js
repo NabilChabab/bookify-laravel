@@ -80,3 +80,36 @@ function fadeIn(el, display) {
 };
 
 
+
+//view reservations
+
+document.addEventListener('DOMContentLoaded', function() {
+    var viewReservationsBtn = document.getElementById('viewReservationsBtn');
+    viewReservationsBtn.addEventListener('click', function() {
+        var reservationsModal = new bootstrap.Modal(document.getElementById('reservationsModal'));
+        reservationsModal.show();
+    });
+});
+
+
+//reservation
+
+$(document).ready(function() {
+    // Attach click event handler to "Book Now" buttons
+    $('.reserve-btn').on('click', function() {
+        // Get book information from the clicked button
+        var bookId = $(this).data('book-id');
+        var bookTitle = $(this).closest('.card-body').find('.card-title').text();
+        var bookDescription = $(this).closest('.card-body').find('.card-text').text();
+        var bookCover = $(this).data('book-cover');
+
+        // Update modal content with book information
+        $('#bookId').val(bookId);
+        $('#bookTitle').text(bookTitle);
+        $('#bookDescription').text(bookDescription);
+        $('#bookCover').attr('src', bookCover); // Update image source
+
+        // Show the modal
+        $('#reservationModal').modal('show');
+    });
+});

@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-// Route::get('/home', function () {
+// Route::get('/', function () {
 //     return view('home');
 // });
 
